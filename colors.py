@@ -1,0 +1,4 @@
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+DARK_GREEN = (5, 74, 24)
+DARK_GREY = (50, 50, 50)

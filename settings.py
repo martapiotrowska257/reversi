@@ -1,0 +1,7 @@
+WIDTH = 800
+HEIGHT = 800
+TITLE = "Reversi in Python"
+
+ROWS = 8
+COLS = 8
+TILE_SIZE = 80
