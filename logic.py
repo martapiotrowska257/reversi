@@ -92,8 +92,8 @@ class ReversiLogic:
         p2 = sum(row.count(2) for row in self.board)
 
         if p1 > p2:
-            return f"Wygrał CZARNY: ${p1} do {p2}"
+            return f"Wygrał CZARNY: {p1} do {p2}"
         elif p2 > p1:
-            return f"Wygrał BIAŁY : ${p2} do {p1}"
+            return f"Wygrał BIAŁY : {p2} do {p1}"
         else:
             return "REMIS"
