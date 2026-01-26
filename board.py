@@ -6,20 +6,18 @@ class Board:
     def __init__(self):
         self.start_x = (WIDTH - (COLS * TILE_SIZE)) // 2
         self.start_y = (HEIGHT - (ROWS * TILE_SIZE)) // 2
-
-        # --- MODEL DANYCH (LOGIKA) ---
-        # Tworzymy macierz 8 × 8 wypełnioną zerami.
-        # 0 = puste pole, 1 = gracz czarny, 2 = gracz biały
-        self.board = [[0 for _ in range(COLS)] for _ in range(ROWS)]
-        self.setup_starting_position()
+        self.board = [[0 for _ in range(COLS)] for _ in range(ROWS)] # Tworzymy macierz 8 × 8 wypełnioną zerami.
+                                                                     # 0 = puste pole, 1 = gracz czarny, 2 = gracz biały
         self.font = pygame.font.SysFont('Arial', 24, bold=True)
 
-    def setup_starting_position(self):
-        # Zgodnie z zasadami: Biały (2) na [3][3] i [4][4], Czarny (1) na [3][4] i [4][3]
-        self.board[3][3] = 2
-        self.board[3][4] = 1
-        self.board[4][3] = 1
-        self.board[4][4] = 2
+    def update_from_string(self, board_str):
+        # Oczekujemy ciągu 64 znaków (0,1 lub 2)
+        idx = 0
+        for r in range(ROWS):
+            for c in range(COLS):
+                if idx < len(board_str):
+                    self.board[r][c] = int(board_str[idx])
+                    idx += 1
 
     def draw(self, window):
         pygame.draw.rect(window, GREEN, (self.start_x, self.start_y, COLS * TILE_SIZE, ROWS * TILE_SIZE))
@@ -28,11 +26,12 @@ class Board:
         self.draw_pieces(window)
 
     def draw_grid(self, window):
+        # Linie poziome siatki
         for row in range(ROWS + 1):
             pygame.draw.line(window, BLACK,
                              (self.start_x, self.start_y + row * TILE_SIZE),
                              (self.start_x + COLS * TILE_SIZE, self.start_y + row * TILE_SIZE))
-
+        # Linie pionowe siatki
         for col in range(COLS + 1):
             pygame.draw.line(window, BLACK,
                              (self.start_x + col * TILE_SIZE, self.start_y),
@@ -68,7 +67,7 @@ class Board:
             for col in range(COLS):
                 piece = self.board[row][col]
 
-                if piece != 0:
+                if piece != 0:  # Jeśli pole nie jest puste, obliczamy pozycję i rysujemy pionek
                     center_x = self.start_x + col * TILE_SIZE + TILE_SIZE // 2
                     center_y = self.start_y + row * TILE_SIZE + TILE_SIZE // 2
                     radius = TILE_SIZE // 2 - 5  # -5, żeby pionek nie stykał się z linią
