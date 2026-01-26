@@ -1,6 +1,8 @@
 WIDTH = 800
-HEIGHT = 800
+HEIGHT = 780
 TITLE = "Reversi in Python"
+
+FPS = 60
 
 ROWS = 8
 COLS = 8

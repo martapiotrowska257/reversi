@@ -11,9 +11,11 @@ class Game:
         pygame.display.set_caption(TITLE)
         self.running = True
         self.board = Board()
+        self.clock = pygame.time.Clock()
 
     def run(self):  # Game loop
         while self.running:
+            self.clock.tick(FPS)
             self.input()
             self.update()
             self.draw()
@@ -29,7 +31,7 @@ class Game:
         pass
 
     def draw(self):
-        self.screen.fill(DARK_GREY)
+        self.screen.fill(PINK)
         self.board.draw(self.screen)    # drawing the board
         pygame.display.flip()           # updating the screen
 
